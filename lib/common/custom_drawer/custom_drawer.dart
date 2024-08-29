@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:virtual_marketplace/common/custom_drawer/drawer_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
