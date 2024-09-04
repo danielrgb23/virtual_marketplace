@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_marketplace/models/page_manager.dart';
+import 'package:virtual_marketplace/themes/theme_colors.dart';
 
 class DrawerTile extends StatelessWidget {
   const DrawerTile(
@@ -27,14 +28,14 @@ class DrawerTile extends StatelessWidget {
               child: Icon(
                 iconData,
                 size: 32,
-                color: curPage == page ? Colors.red : Colors.grey[700],
+                color: curPage == page ? ThemeColors.primary : Colors.grey[700],
               ),
             ),
             Text(
               title,
               style: TextStyle(
                 fontSize: 16,
-                color: curPage == page ? Colors.red : Colors.grey[700],
+                color: curPage == page ? ThemeColors.primary : Colors.grey[700],
               ),
             )
           ],

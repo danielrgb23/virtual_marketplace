@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_marketplace/firebase_options.dart';
 import 'package:virtual_marketplace/screens/base/base_screen.dart';
+import 'package:virtual_marketplace/themes/theme.dart';
+import 'package:virtual_marketplace/themes/theme_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,10 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Loja de roupas',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: theme,
       home: BaseScreen(),
     );
   }
