@@ -1,17 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:virtual_marketplace/models/user.dart';
 import 'package:virtual_marketplace/helpers/validators.dart';
-import 'package:virtual_marketplace/themes/theme_colors.dart';
+import 'package:virtual_marketplace/service/auth_service.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passController = TextEditingController();
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+//    _entrarUsuario({required String email, required String senha}) {
+//     authService.entrarUsuario(email: email, senha: senha).then((String? erro) {
+//       if (erro != null) {
+//         print(erro);
+//       }
+//     });
+//   }
+
+//   _criarUsuario(
+//       {required String email, required String senha, required String nome}) {
+//     authService
+//         .cadastrarUsuario(
+//       email: email,
+//       senha: senha,
+//       nome: nome,
+//     )
+//         .then((String? erro) {
+//       if (erro != null) {
+//         // showSnackBar(context: context, mensagem: erro);
+//         print(erro);
+//       }
+//     });
+//   }
+
+//  botaoEnviarClicado() {
+//     String email = emailController.text;
+//     String senha = passController.text;
+
+//     // if (formKey.currentState!.validate()) {
+//     //   if (isEntrando) {
+//     //     _entrarUsuario(email: email, senha: senha);
+//     //   } else {
+//     //     _criarUsuario(email: email, senha: senha, nome: nome);
+//     //   }
+//     // }
+//   }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Entrar'),
@@ -57,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     style: const ButtonStyle(
-                      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                      padding: WidgetStatePropertyAll(EdgeInsets.zero),
                     ),
                     onPressed: () {},
                     child: const Text("Esqueci minha senha"),
@@ -71,11 +116,14 @@ class LoginScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        print(emailController.text);
+                        context.read<AuthService>().signIn(
+                            user: UserData(
+                                email: emailController.text,
+                                password: passController.text));
                       }
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateColor.resolveWith(
+                      backgroundColor: WidgetStateColor.resolveWith(
                         (states) => const Color.fromARGB(255, 4, 125, 141),
                       ),
                     ),

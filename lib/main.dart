@@ -1,9 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_marketplace/firebase_options.dart';
-import 'package:virtual_marketplace/screens/base/base_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:virtual_marketplace/themes/theme.dart';
-import 'package:virtual_marketplace/themes/theme_colors.dart';
+import 'package:virtual_marketplace/firebase_options.dart';
+import 'package:virtual_marketplace/service/auth_service.dart';
+import 'package:virtual_marketplace/screens/base/base_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,11 +23,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Loja de roupas',
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      home: BaseScreen(),
+    return Provider(
+      create: (_) => AuthService(),
+      child: MaterialApp(
+        title: 'Loja de roupas',
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        home: BaseScreen(),
+      ),
     );
   }
 }
