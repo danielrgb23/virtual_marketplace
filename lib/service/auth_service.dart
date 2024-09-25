@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:virtual_marketplace/models/user.dart';
+import 'package:virtual_marketplace/helpers/firebase_errors.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<String?> signIn(
-      {required UserData user}) async {
+      {required UserData user, required Function onSucess,required Function onError}) async {
     try {
-     final result = await _firebaseAuth.signInWithEmailAndPassword(
+      final result = await _firebaseAuth.signInWithEmailAndPassword(
           email: user.email, password: user.password);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -16,6 +17,7 @@ class AuthService {
         case "wrong-password":
           return "Email ou senha incorretos";
       }
+      onError(getErrorString(e.code));
       return e.code;
     }
     return null;

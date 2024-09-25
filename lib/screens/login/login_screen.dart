@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:virtual_marketplace/models/user.dart';
 import 'package:virtual_marketplace/helpers/validators.dart';
 import 'package:virtual_marketplace/service/auth_service.dart';
+import 'package:virtual_marketplace/helpers/show_snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,44 +21,10 @@ class _LoginScreenState extends State<LoginScreen> {
     final TextEditingController passController = TextEditingController();
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
 
-//    _entrarUsuario({required String email, required String senha}) {
-//     authService.entrarUsuario(email: email, senha: senha).then((String? erro) {
-//       if (erro != null) {
-//         print(erro);
-//       }
-//     });
-//   }
-
-//   _criarUsuario(
-//       {required String email, required String senha, required String nome}) {
-//     authService
-//         .cadastrarUsuario(
-//       email: email,
-//       senha: senha,
-//       nome: nome,
-//     )
-//         .then((String? erro) {
-//       if (erro != null) {
-//         // showSnackBar(context: context, mensagem: erro);
-//         print(erro);
-//       }
-//     });
-//   }
-
-//  botaoEnviarClicado() {
-//     String email = emailController.text;
-//     String senha = passController.text;
-
-//     // if (formKey.currentState!.validate()) {
-//     //   if (isEntrando) {
-//     //     _entrarUsuario(email: email, senha: senha);
-//     //   } else {
-//     //     _criarUsuario(email: email, senha: senha, nome: nome);
-//     //   }
-//     // }
-//   }
     return Scaffold(
+      key: scaffoldkey,
       appBar: AppBar(
         title: const Text('Entrar'),
         centerTitle: true,
@@ -116,10 +83,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        context.read<AuthService>().signIn(
-                            user: UserData(
-                                email: emailController.text,
-                                password: passController.text));
+                        context
+                            .read<AuthService>()
+                            .signIn(
+                                onSucess: () {
+                                  //TODO: FECHAR TELA DE LOGIN
+                                },
+                                onError: (e) {},
+                                user: UserData(
+                                    email: emailController.text,
+                                    password: passController.text))
+                            .then((String? error) {
+                          showSnackBar(context: context, mensagem: error!);
+                        });
                       }
                     },
                     style: ButtonStyle(
