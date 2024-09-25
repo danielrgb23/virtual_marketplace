@@ -35,10 +35,52 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+
+  # Firebase 
   cloud_firestore: ^5.3.0
   firebase_auth: ^5.2.0
   firebase_storage: ^12.2.0
   firebase_core: ^3.4.0
+  firebase_messaging: ^15.1.2
+
+  # Gerenciamento de estado
+  provider: ^6.1.2
+
+  # Carousel (carrossel de imagens), substituindo `carousel_pro` por um pacote compatível com Dart 3
+  carousel_slider: ^4.2.1
+
+  # Layouts de grade escalonada
+  flutter_staggered_grid_view: ^0.6.2
+
+  # Imagens
+  transparent_image: ^2.0.0
+  image_picker: ^1.0.0
+  image_cropper: ^4.0.1
+
+  # Outras utilidades
+  uuid: ^4.5.0
+  dio: ^5.3.2
+  brasil_fields: ^1.7.0
+  geolocator: ^13.0.1
+  sliding_up_panel: ^2.0.0
+  screenshot: ^3.0.0
+  gallery_saver: ^2.3.0
+  flutter_signin_button: ^2.0.0
+  flutter_facebook_auth: ^5.0.7
+  url_launcher: ^6.1.10
+  map_launcher: ^3.5.0
+  flip_card: ^0.6.0
+  mask_text_input_formatter: ^2.9.0
+  credit_card_type_detector: ^3.0.0
+  keyboard_actions: ^4.2.0
+  cpf_cnpj_validator: ^2.0.0
+
+  # Notificações e barra de status
+  another_flushbar: ^1.12.30
+
+  # Geração de dados falsos (faker) para testes e desenvolvimento
+  faker: ^2.0.0
+  alphabet_list_scroll_view: ^2.0.0
 
 dev_dependencies:
   flutter_test:
