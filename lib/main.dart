@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:virtual_marketplace/themes/theme.dart';
 import 'package:virtual_marketplace/firebase_options.dart';
-import 'package:virtual_marketplace/service/auth_service.dart';
+import 'package:virtual_marketplace/models/user_manager.dart';
 import 'package:virtual_marketplace/screens/base/base_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
-  runApp(const MyApp());
+
+  runApp(MyApp());
 
   // FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -23,12 +22,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (_) => AuthService(),
+    return ChangeNotifierProvider(
+      create: (_) => UserManager(),
       child: MaterialApp(
-        title: 'Loja de roupas',
+        title: 'Loja do Daniel',
         debugShowCheckedModeBanner: false,
-        theme: theme,
+        theme: ThemeData(
+          primaryColor: const Color.fromARGB(255, 4, 125, 141),
+          scaffoldBackgroundColor: const Color.fromARGB(255, 4, 125, 141),
+          appBarTheme: const AppBarTheme(elevation: 0),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
         home: BaseScreen(),
       ),
     );
