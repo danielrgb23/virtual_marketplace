@@ -6,7 +6,6 @@ import 'package:virtual_marketplace/models/user_manager.dart';
 import 'package:virtual_marketplace/helpers/show_snack_bar.dart';
 
 class LoginScreen extends StatelessWidget {
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
 
@@ -84,6 +83,8 @@ class LoginScreen extends StatelessWidget {
                                       },
                                       onSuccess: () {
                                         // TODO: FECHAR TELA DE LOGIN
+                                        showSnackBar(
+                                            context: context, mensagem: 'FUNCIONOU');
                                       });
                                 }
                               },
@@ -92,13 +93,15 @@ class LoginScreen extends StatelessWidget {
                             (states) => const Color.fromARGB(255, 4, 125, 141),
                           ),
                         ),
-                        child: const Text(
-                          "Entrar",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
-                        ),
+                        child: userManager.loading
+                            ? const CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white),
+                              )
+                            : const Text(
+                                'Entrar',
+                                style: TextStyle(fontSize: 18, color: Colors.white),
+                              ),
                       ),
                     ),
                   ],
